@@ -14,22 +14,24 @@ import {InsertComment,
     Add} from "@material-ui/icons"
 import SidebarOption from './SidebarOption';
 import {useCollection} from 'react-firebase-hooks/firestore'
-import { db } from '../firebase';
+import { aut, db } from '../firebase';
 import { collection } from "firebase/firestore"; 
+import {useAuthState} from 'react-firebase-hooks/auth'
+
 
 
 
 function Sidebar() {
   const [channels, loading, error] = useCollection(collection(db, "rooms"))
-
+  const [user] = useAuthState(aut)
   return <SidebarContainer>
 
     <SidebarHeader>
         <SidebarInfo>
-            <h2>PAPA FUN HQ</h2>
+            <h2>BABAMSI FUN CHAT</h2>
             <h3>
                 <FiberManualRecord />
-                Bamsi
+                {user.displayName}
             </h3>
         </SidebarInfo>
         <Create />
